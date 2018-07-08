@@ -649,8 +649,8 @@ void useAdventurerCard(struct gameState *state, int currentPlayer, int temphand[
 {
 	int drawntreasure = 0;
 	int cardDrawn = 0;
-
-	while (drawntreasure<2)
+	// Bug: drawntreasure <= 2
+	while (drawntreasure < 2) // original: drawntreasure < 2
 	{
 		//if the deck is empty we need to shuffle discard and add to deck
 		if (state->deckCount[currentPlayer] < 1)
@@ -689,7 +689,8 @@ void useSmithyCard(struct gameState *state, int currentPlayer, int handPos)
 	int i = 0;
 
 	//+3 Cards
-	for (i = 0; i < 3; i++)
+	// Bug: i = 1
+	for (i = 1; i < 3; i++) // original: i = 0
 	{
 		drawCard(currentPlayer, state);
 	}
@@ -730,7 +731,8 @@ int useRemodelCard(struct gameState *state, int currentPlayer, int handPos, int 
 
 	j = state->hand[currentPlayer][choice1];  //store card we will trash
 
-	if ((getCost(state->hand[currentPlayer][choice1]) + 2) > getCost(choice2))
+	// Bug: (getCost(state->hand[currentPlayer][choice1]) + 3
+	if ((getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2)) // original: (getCost(state->hand[currentPlayer][choice1]) + 2
 	{
 		return -1;
 	}
@@ -762,7 +764,8 @@ void useBaronCard(struct gameState *state, int currentPlayer, int choice1)
 		//Iterator for hand!
 		int p = 0;
 		//Flag for discard set!
-		int card_not_discarded = 1;
+		// Bug: card_not_discarded = 0
+		int card_not_discarded = 0; // original: card_not_discarded = 1
 
 		while (card_not_discarded)
 		{
