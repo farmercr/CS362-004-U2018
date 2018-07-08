@@ -723,7 +723,7 @@ void useCouncilRoomCard(struct gameState *state, int currentPlayer, int handPos)
 	discardCard(handPos, currentPlayer, state, 0);
 }
 
-void useRemodelCard(struct gameState *state, int currentPlayer, int handPos, int choice1, int choice2)
+int useRemodelCard(struct gameState *state, int currentPlayer, int handPos, int choice1, int choice2)
 {
 	int j = 0;
 	int i = 0;
@@ -749,8 +749,7 @@ void useRemodelCard(struct gameState *state, int currentPlayer, int handPos, int
 			break;
 		}
 	}
-
-
+	return 0;
 }
 
 void useBaronCard(struct gameState *state, int currentPlayer, int choice1)
@@ -838,8 +837,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
   int tributeRevealedCards[2] = {-1, -1};
   int temphand[MAX_HAND];// moved above the if statement
-  int drawntreasure=0;
-  int cardDrawn;
+  // int drawntreasure=0;
+  // int cardDrawn;
   int z = 0;// this is the counter for the temp hand
   if (nextPlayer > (state->numPlayers - 1)){
     nextPlayer = 0;
@@ -952,8 +951,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	
 	 // remodel case refactored. function is above		
     case remodel:
-		 useRemodelCard(state, currentPlayer, handPos, choice1, choice2);
-      return 0;
+		int result = useRemodelCard(state, currentPlayer, handPos, choice1, choice2);
+		return result;
 
 	 // smithy case refactored. function is above	
     case smithy:
