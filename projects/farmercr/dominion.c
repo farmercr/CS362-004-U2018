@@ -951,7 +951,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	
 	 // remodel case refactored. function is above		
     case remodel:
-		int result = useRemodelCard(state, currentPlayer, handPos, choice1, choice2);
+		int result = 0;
+		result = useRemodelCard(state, currentPlayer, handPos, choice1, choice2);
 		return result;
 
 	 // smithy case refactored. function is above	
