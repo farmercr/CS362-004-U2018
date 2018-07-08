@@ -834,7 +834,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   int index;
   int currentPlayer = whoseTurn(state);
   int nextPlayer = currentPlayer + 1;
-
+  int result = 0;
   int tributeRevealedCards[2] = {-1, -1};
   int temphand[MAX_HAND];// moved above the if statement
   // int drawntreasure=0;
@@ -951,7 +951,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	
 	 // remodel case refactored. function is above		
     case remodel:
-		int result = 0;
 		result = useRemodelCard(state, currentPlayer, handPos, choice1, choice2);
 		return result;
 
