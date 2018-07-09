@@ -650,7 +650,7 @@ void useAdventurerCard(struct gameState *state, int currentPlayer, int temphand[
 	int drawntreasure = 0;
 	int cardDrawn = 0;
 	// Bug: drawntreasure <= 2
-	while (drawntreasure < 2) // original: drawntreasure < 2
+	while (drawntreasure <= 2) // original: drawntreasure < 2
 	{
 		//if the deck is empty we need to shuffle discard and add to deck
 		if (state->deckCount[currentPlayer] < 1)
