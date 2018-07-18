@@ -50,7 +50,6 @@ int main()
 	int startHandTreasure = 0;
 	int testHandTreasure = 0;
 	int currentCard;
-	char* cardName;
 
 	// initialize a game state and player cards
 	initializeGame(numPlayers, k, seed, &testGame);
@@ -112,8 +111,11 @@ int main()
 	i = 0;
 	while (i < 10)
 	{
-		cardName = k[i] + " card pile count";
-		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardName);
+		char* cardStatement = malloc(sizeof(char) + strlen(k[1]) + 17 + 1);
+		strcpy(cardStatement, k[i]);
+		strcat(cardStatement, " card pile count");
+		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
+		free(cardStatement);
 	}
 
 	printf("----- %s Card Testing Complete -----\n", TESTCARD);
