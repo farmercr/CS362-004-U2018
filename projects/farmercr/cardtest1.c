@@ -25,9 +25,9 @@ void assertResult(int expected, int actual, char* testDescription)
 {
 	if (expected == actual)
 	{
-		textcolor(GREEN);
+		textcolor(2);
 		printf("SUCCESS:");
-		textcolor(WHITE);
+		textcolor(15);
 		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 	else
