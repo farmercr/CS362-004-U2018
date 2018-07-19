@@ -14,6 +14,7 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include <stdio.h>
+#include <string.h>
 #include "rngs.h"
 
 #define TESTCARD "Adventurer"
@@ -22,7 +23,7 @@ void assertResult(int expected, int actual, char* testDescription)
 {
 	if (expected == actual)
 	{
-		printf("SUCCESSFULLY COMPLETED: %s; Expected: %d, Actual: %d\n", testDescription);
+		printf("SUCCESSFULLY COMPLETED: %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 	else
 	{
@@ -52,10 +53,10 @@ int main()
 	int currentCard;
 
 	// initialize a game state and player cards
-	initializeGame(numPlayers, k, seed, &testGame);
+	initializeGame(numPlayers, k, seed, &startGame);
 
 	//startGame = testGame;
-	memcpy(&startGame, &testGame, sizeof(struct gameState));
+	memcpy(&testGame, &startGame, sizeof(struct gameState));
 	//startGame = testGame;
 
 	printf("----- Testing %s Card -----\n", TESTCARD);
