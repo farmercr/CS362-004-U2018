@@ -20,21 +20,20 @@
 #include "rngs.h"
 
 #define TESTCARD "Adventurer"
+#define RED_TEXT "\x1b[31m"
+#define GREEN_TEXT "\x1b[32m"
+#define RESET_TEXT "\x1b[0m"
 
 void assertResult(int expected, int actual, char* testDescription)
 {
 	if (expected == actual)
 	{
-		textcolor(2);
-		printf("SUCCESS:");
-		textcolor(15);
+		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
 		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 	else
 	{
-		textcolor(RED);
-		printf("FAIL:");
-		textcolor(WHITE);
+		printf(RED_TEXT "FAIL:" RESET_TEXT);
 		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 }
