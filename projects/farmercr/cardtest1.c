@@ -22,7 +22,7 @@ void assertResult(int expected, int actual, char* testDescription)
 {
 	if (expected == actual)
 	{
-		printf("SUCCESSFULLY COMPLETED: %s\n", testDescription);
+		printf("SUCCESSFULLY COMPLETED: %s; Expected: %d, Actual: %d\n", testDescription);
 	}
 	else
 	{
@@ -55,7 +55,7 @@ int main()
 	initializeGame(numPlayers, k, seed, &testGame);
 
 	//startGame = testGame;
-	memcpy(&testGame, &startGame, sizeof(struct gameState));
+	memcpy(&startGame, &testGame, sizeof(struct gameState));
 
 	printf("----- Testing %s Card -----\n", TESTCARD);
 
@@ -111,7 +111,7 @@ int main()
 	i = 0;
 	while (i < 10)
 	{
-		char* cardStatement = malloc(sizeof(char) + strlen(k[1]) + 17 + 1);
+		char* cardStatement = malloc(sizeof(char) * (strlen(k[1]) + 17 + 1));
 		strcpy(cardStatement, k[i]);
 		strcat(cardStatement, " card pile count");
 		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
