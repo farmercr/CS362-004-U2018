@@ -55,7 +55,8 @@ int main()
 	initializeGame(numPlayers, k, seed, &testGame);
 
 	//startGame = testGame;
-	memcpy(&startGame, &testGame, sizeof(struct gameState));
+	//memcpy(&startGame, &testGame, sizeof(struct gameState));
+	startGame = testGame;
 
 	printf("----- Testing %s Card -----\n", TESTCARD);
 
