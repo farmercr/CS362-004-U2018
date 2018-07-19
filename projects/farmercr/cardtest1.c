@@ -15,6 +15,7 @@
 #include "dominion_helpers.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "rngs.h"
 
 #define TESTCARD "Adventurer"
@@ -47,7 +48,8 @@ int main()
 	struct gameState startGame, testGame;
 	int k[10] = {adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village};
-
+	const char* kingdomCardNames[] = {"Adventurer", "Baron", "Council_Room",
+		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village"};
 	int startHandTreasure = 0;
 	int testHandTreasure = 0;
 	int currentCard;
@@ -113,8 +115,8 @@ int main()
 	i = 0;
 	while (i < 10)
 	{
-		char* cardStatement = malloc(sizeof(char) * (strlen(k[1]) + 17 + 1));
-		strcpy(cardStatement, k[i]);
+		char* cardStatement = malloc(sizeof(char) * (strlen(kingdomCardNames[i]) + 16 + 1));
+		strcpy(cardStatement, kingdomCardNames[i]);
 		strcat(cardStatement, " card pile count");
 		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
 		free(cardStatement);
