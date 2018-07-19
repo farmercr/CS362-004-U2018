@@ -39,7 +39,7 @@ int main()
 	//int xtraCoins = 0;
 	//int shuffledCards = 0;
 
-	int i//, j, m;
+	int i;
 	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
 	//int remove1, remove2;
 	int seed = 50;
