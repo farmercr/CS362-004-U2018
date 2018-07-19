@@ -24,11 +24,17 @@ void assertResult(int expected, int actual, char* testDescription)
 {
 	if (expected == actual)
 	{
-		printf("SUCCESSFULLY COMPLETED: %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+		textcolor(GREEN);
+		printf("SUCCESS:");
+		textcolor(WHITE);
+		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 	else
 	{
-		printf("FAILED: %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+		textcolor(RED);
+		printf("FAIL:");
+		textcolor(WHITE);
+		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 }
 
@@ -55,19 +61,19 @@ int main()
 	int currentCard;
 
 	// initialize a game state and player cards
-	initializeGame(numPlayers, k, seed, &startGame);
+	initializeGame(numPlayers, k, seed, &testGame);
 
 	//startGame = testGame;
-	memcpy(&testGame, &startGame, sizeof(struct gameState));
+	memcpy(&startGame, &testGame, sizeof(struct gameState));
 	//startGame = testGame;
 
-	printf("----- Testing %s Card -----\n", TESTCARD);
+	printf("\n          ----- Testing %s Card -----\n", TESTCARD);
 
 	// 'play' the adventurer card
 	cardEffect(adventurer, choice1, choice2, choice3, &testGame, handpos, &bonus);
 
 	// test that player played 1 card
-	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
+	//assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 	
 	// test that player gained 2 cards
 	assertResult((startGame.handCount[thisPlayer] + 2 - 1), testGame.handCount[thisPlayer], "Player hand count");
@@ -125,6 +131,6 @@ int main()
 		i++;
 	}
 
-	printf("----- %s Card Testing Complete -----\n", TESTCARD);
+	printf("          ----- %s Card Testing Complete -----\n\n", TESTCARD);
 
 }
