@@ -67,10 +67,10 @@ int main()
 	cardEffect(adventurer, choice1, choice2, choice3, &testGame, handpos, &bonus);
 
 	// test that player played 1 card
-	//assertResult(startGame.playedCardCount + 1, testGame.playedCardCount, "Player played card count");
+	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 	
 	// test that player gained 2 cards
-	assertResult(startGame.handCount[thisPlayer] + 2 - 1, testGame.handCount[thisPlayer], "Player hand count");
+	assertResult((startGame.handCount[thisPlayer] + 2 - 1), testGame.handCount[thisPlayer], "Player hand count");
 
 	// test that player coin count is unchanged
 	assertResult(startGame.coins, testGame.coins, "Player coin count");
@@ -85,6 +85,7 @@ int main()
 		{
 			startHandTreasure++;
 		}
+		i++;
 	}
 	// count the treasure cards in the test hand
 	i = 0;
@@ -95,6 +96,7 @@ int main()
 		{
 			testHandTreasure++;
 		}
+		i++;
 	}
 	assertResult(startHandTreasure + 2, testHandTreasure, "Player treasure card count");
 
@@ -120,6 +122,7 @@ int main()
 		strcat(cardStatement, " card pile count");
 		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
 		free(cardStatement);
+		i++;
 	}
 
 	printf("----- %s Card Testing Complete -----\n", TESTCARD);
