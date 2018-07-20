@@ -11,3 +11,127 @@
 *	https://www.gnu.org/software/make/manual/make.html
 ******************************************************************************/
 
+#include "dominion.h"
+#include "dominion_helpers.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "rngs.h"
+
+#define TESTCARD "Adventurer"
+#define RED_TEXT "\x1b[31m"
+#define GREEN_TEXT "\x1b[32m"
+#define RESET_TEXT "\x1b[0m"
+
+void assertResult(int expected, int actual, char* testDescription)
+{
+	if (expected == actual)
+	{
+		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
+		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+	}
+	else
+	{
+		printf(RED_TEXT "   FAIL:" RESET_TEXT);
+		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+	}
+}
+
+int main()
+{
+	//int newCards = 0;
+	//int discarded = 1;
+	//int xtraCoins = 0;
+	//int shuffledCards = 0;
+
+	int i;
+	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+	//int remove1, remove2;
+	int seed = 50;
+	int numPlayers = 2;
+	int thisPlayer = 0;
+	struct gameState startGame, testGame;
+	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
+		remodel, smithy, tribute, village };
+	const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council_Room",
+		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
+	int startHandTreasure = 0;
+	int testHandTreasure = 0;
+	int currentCard;
+
+	// initialize a game state and player cards
+	initializeGame(numPlayers, k, seed, &testGame);
+
+	//startGame = testGame;
+	memcpy(&startGame, &testGame, sizeof(struct gameState));
+	//startGame = testGame;
+
+	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
+
+	// 'play' the adventurer card
+	//cardEffect(adventurer, choice1, choice2, choice3, &testGame, handpos, &bonus);
+
+/*
+	// test that player played 1 card
+	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
+
+	// test that player gained 2 cards
+	assertResult((startGame.handCount[thisPlayer] + 2 - 1), testGame.handCount[thisPlayer], "Player hand count");
+
+	// test that player coin count is unchanged
+	assertResult(startGame.coins, testGame.coins, "Player coin count");
+
+	// test that player gained 2 treasure cards
+	// count the treasure cards in the starting hand
+	i = 0;
+	while (i < startGame.handCount[thisPlayer])
+	{
+		currentCard = startGame.hand[thisPlayer][i];
+		if (currentCard == copper || currentCard == silver || currentCard == gold)
+		{
+			startHandTreasure++;
+		}
+		i++;
+	}
+	// count the treasure cards in the test hand
+	i = 0;
+	while (i < testGame.handCount[thisPlayer])
+	{
+		currentCard = testGame.hand[thisPlayer][i];
+		if (currentCard == copper || currentCard == silver || currentCard == gold)
+		{
+			testHandTreasure++;
+		}
+		i++;
+	}
+	assertResult(startHandTreasure + 2, testHandTreasure, "Player treasures-in-hand card count");
+*/
+
+	// test the treasure card piles
+	assertResult(startGame.supplyCount[copper], testGame.supplyCount[copper], "Copper card pile count");
+	assertResult(startGame.supplyCount[silver], testGame.supplyCount[silver], "Silver card pile count");
+	assertResult(startGame.supplyCount[gold], testGame.supplyCount[gold], "Gold card pile count");
+
+	// test the curse card pile
+	assertResult(startGame.supplyCount[curse], testGame.supplyCount[curse], "Curse card pile count");
+
+	// test the victory card piles
+	assertResult(startGame.supplyCount[estate], testGame.supplyCount[estate], "Estate card pile count");
+	assertResult(startGame.supplyCount[duchy], testGame.supplyCount[duchy], "Duchy card pile count");
+	assertResult(startGame.supplyCount[province], testGame.supplyCount[province], "Province card pile count");
+
+	// test the kingdom card piles
+	i = 0;
+	while (i < 10)
+	{
+		char* cardStatement = malloc(sizeof(char) * (strlen(kingdomCardNames[i]) + 16 + 1));
+		strcpy(cardStatement, kingdomCardNames[i]);
+		strcat(cardStatement, " card pile count");
+		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
+		free(cardStatement);
+		i++;
+	}
+
+	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
+
+}
