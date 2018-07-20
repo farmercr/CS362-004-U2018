@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include "rngs.h"
 
-#define TESTCARD "Adventurer"
+#define TESTCARD "Smithy"
 #define RED_TEXT "\x1b[31m"
 #define GREEN_TEXT "\x1b[32m"
 #define RESET_TEXT "\x1b[0m"
@@ -68,44 +68,17 @@ int main()
 
 	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
 
-	// 'play' the adventurer card
-	//cardEffect(adventurer, choice1, choice2, choice3, &testGame, handpos, &bonus);
+	// 'play' the smithy card
+	cardEffect(smithy, choice1, choice2, choice3, &testGame, handpos, &bonus);
 
-/*
 	// test that player played 1 card
 	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 
 	// test that player gained 2 cards
-	assertResult((startGame.handCount[thisPlayer] + 2 - 1), testGame.handCount[thisPlayer], "Player hand count");
+	assertResult((startGame.handCount[thisPlayer] + 3 - 1), testGame.handCount[thisPlayer], "Player hand count");
 
 	// test that player coin count is unchanged
 	assertResult(startGame.coins, testGame.coins, "Player coin count");
-
-	// test that player gained 2 treasure cards
-	// count the treasure cards in the starting hand
-	i = 0;
-	while (i < startGame.handCount[thisPlayer])
-	{
-		currentCard = startGame.hand[thisPlayer][i];
-		if (currentCard == copper || currentCard == silver || currentCard == gold)
-		{
-			startHandTreasure++;
-		}
-		i++;
-	}
-	// count the treasure cards in the test hand
-	i = 0;
-	while (i < testGame.handCount[thisPlayer])
-	{
-		currentCard = testGame.hand[thisPlayer][i];
-		if (currentCard == copper || currentCard == silver || currentCard == gold)
-		{
-			testHandTreasure++;
-		}
-		i++;
-	}
-	assertResult(startHandTreasure + 2, testHandTreasure, "Player treasures-in-hand card count");
-*/
 
 	// test the treasure card piles
 	assertResult(startGame.supplyCount[copper], testGame.supplyCount[copper], "Copper card pile count");
