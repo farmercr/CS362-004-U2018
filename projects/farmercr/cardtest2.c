@@ -45,19 +45,19 @@ int main()
 	//int shuffledCards = 0;
 
 	int i;
-	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+	//int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
 	//int remove1, remove2;
 	int seed = 50;
 	int numPlayers = 2;
-	int thisPlayer = 0;
+	//int thisPlayer = 0;
 	struct gameState startGame, testGame;
 	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village };
 	const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council_Room",
 		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
-	int startHandTreasure = 0;
-	int testHandTreasure = 0;
-	int currentCard;
+	//int startHandTreasure = 0;
+	//int testHandTreasure = 0;
+	//int currentCard;
 
 	// initialize a game state and player cards
 	initializeGame(numPlayers, k, seed, &testGame);
