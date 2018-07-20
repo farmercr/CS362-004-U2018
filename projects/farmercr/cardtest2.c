@@ -74,6 +74,12 @@ int main()
 	// test that player played 1 card
 	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 
+	// test player action count
+	assertResult(startGame.numActions, testGame.numActions, "Player action count");
+
+	// test player buy count
+	assertResult(startGame.numBuys, testGame.numBuys, "Player buy count");
+
 	// test that player gained 3 cards
 	assertResult((startGame.handCount[thisPlayer] + 3 - 1), testGame.handCount[thisPlayer], "Player hand count");
 
