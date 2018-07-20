@@ -50,6 +50,7 @@ int main()
 	int seed = 50;
 	int numPlayers = 2;
 	int thisPlayer = 0;
+	int nextPlayer = 1;
 	struct gameState startGame, testGame;
 	int k[10] = {adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village};
