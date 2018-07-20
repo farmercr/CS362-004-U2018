@@ -6,7 +6,7 @@
 * Last Modified:	07/22/2018
 * Due Date:			07/22/2018
 * File name:		cardtest2.c
-* Description: A unit test for a dominion game function.
+* Description: A card test for Smithy card function.
 * Websites consulted:
 *	https://www.gnu.org/software/make/manual/make.html
 ******************************************************************************/
@@ -50,6 +50,7 @@ int main()
 	int seed = 50;
 	int numPlayers = 2;
 	int thisPlayer = 0;
+	int nextPlayer = 1;
 	struct gameState startGame, testGame;
 	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village };
@@ -62,10 +63,9 @@ int main()
 	// initialize a game state and player cards
 	initializeGame(numPlayers, k, seed, &testGame);
 
-	//startGame = testGame;
+	// copy the gameState to maintain a starting state for a baseline
 	memcpy(&startGame, &testGame, sizeof(struct gameState));
-	//startGame = testGame;
-
+	
 	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
 
 	// 'play' the smithy card
@@ -74,8 +74,11 @@ int main()
 	// test that player played 1 card
 	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 
-	// test that player gained 2 cards
+	// test that player gained 3 cards
 	assertResult((startGame.handCount[thisPlayer] + 3 - 1), testGame.handCount[thisPlayer], "Player hand count");
+
+	// test that the player deck decreased by 3 cards
+	assertResult((startGame.deckCount[thisPlayer] - 3), testGame.deckCount[thisPlayer], "Player deck count");
 
 	// test that player coin count is unchanged
 	assertResult(startGame.coins, testGame.coins, "Player coin count");
@@ -104,6 +107,12 @@ int main()
 		free(cardStatement);
 		i++;
 	}
+
+	// test opponent's hand count
+	assertResult((startGame.handCount[nextPlayer]), testGame.handCount[nextPlayer], "Opponent hand count");
+	
+	// test opponent's deck count
+	assertResult((startGame.deckCount[nextPlayer]), testGame.deckCount[nextPlayer], "Opponent deck count");
 
 	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
 

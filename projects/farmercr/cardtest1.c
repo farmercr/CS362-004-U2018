@@ -6,7 +6,7 @@
 * Last Modified:	07/22/2018
 * Due Date:			07/22/2018
 * File name:		cardtest1.c
-* Description: A unit test for a dominion game function.
+* Description: A card test for Adventurer card function.
 * Websites consulted:
 *	https://www.gnu.org/software/make/manual/make.html
 ******************************************************************************/
@@ -62,9 +62,8 @@ int main()
 	// initialize a game state and player cards
 	initializeGame(numPlayers, k, seed, &testGame);
 
-	//startGame = testGame;
+	// copy the gameState to maintain a starting state for a baseline
 	memcpy(&startGame, &testGame, sizeof(struct gameState));
-	//startGame = testGame;
 
 	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
 
@@ -129,6 +128,12 @@ int main()
 		free(cardStatement);
 		i++;
 	}
+
+	// test opponent's hand count
+	assertResult((startGame.handCount[nextPlayer]), testGame.handCount[nextPlayer], "Opponent hand count");
+	
+	// test opponent's deck count
+	assertResult((startGame.deckCount[nextPlayer]), testGame.deckCount[nextPlayer], "Opponent deck count");
 
 	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
 
