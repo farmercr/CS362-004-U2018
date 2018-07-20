@@ -650,7 +650,7 @@ void useAdventurerCard(struct gameState *state, int currentPlayer, int temphand[
 	int drawntreasure = 0;
 	int cardDrawn = 0;
 	// Bug: drawntreasure <= 2
-	while (drawntreasure < 2) // original: drawntreasure < 2
+	while (drawntreasure <= 2) // original: drawntreasure < 2
 	{
 		//if the deck is empty we need to shuffle discard and add to deck
 		if (state->deckCount[currentPlayer] < 1)
@@ -854,6 +854,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	 // adventurer case refactored. function is above
     case adventurer:
 		useAdventurerCard(state, currentPlayer, temphand, z);
+		//discard card from hand
+		discardCard(handPos, currentPlayer, state, 0);
       return 0;
 
 	 // council_room case refactored. function is above		
@@ -976,6 +978,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     // baron case refactored. function is above
     case baron:
 		useBaronCard(state, currentPlayer, choice1);
+		//discard card from hand
+		discardCard(handPos, currentPlayer, state, 0);
 		return 0;
 		
     case great_hall:
