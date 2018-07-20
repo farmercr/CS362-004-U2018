@@ -32,7 +32,7 @@ void assertResult(int expected, int actual, char* testDescription)
 	}
 	else
 	{
-		printf(RED_TEXT "FAIL:" RESET_TEXT);
+		printf(RED_TEXT "   FAIL:" RESET_TEXT);
 		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
 	}
 }
@@ -66,7 +66,7 @@ int main()
 	memcpy(&startGame, &testGame, sizeof(struct gameState));
 	//startGame = testGame;
 
-	printf("\n          ----- Testing %s Card -----\n", TESTCARD);
+	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
 
 	// 'play' the adventurer card
 	cardEffect(adventurer, choice1, choice2, choice3, &testGame, handpos, &bonus);
@@ -103,7 +103,7 @@ int main()
 		}
 		i++;
 	}
-	assertResult(startHandTreasure + 2, testHandTreasure, "Player treasure card count");
+	assertResult(startHandTreasure + 2, testHandTreasure, "Player treasures-in-hand card count");
 
 	// test the treasure card piles
 	assertResult(startGame.supplyCount[copper], testGame.supplyCount[copper], "Copper card pile count");
@@ -130,6 +130,6 @@ int main()
 		i++;
 	}
 
-	printf("          ----- %s Card Testing Complete -----\n\n", TESTCARD);
+	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
 
 }
