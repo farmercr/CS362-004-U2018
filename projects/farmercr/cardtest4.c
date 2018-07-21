@@ -115,10 +115,10 @@ int main()
 	}
 
 	// test opponent's hand count increased by 1
-	assertResult((startGame.handCount[nextPlayer] + 1), testGame.handCount[nextPlayer], "Opponent hand count");
+	assertResult(startGame.handCount[nextPlayer], testGame.handCount[nextPlayer], "Opponent hand count");
 
 	// test opponent's deck count decreased by 1
-	assertResult((startGame.deckCount[nextPlayer] - 1), testGame.deckCount[nextPlayer], "Opponent deck count");
+	assertResult(startGame.deckCount[nextPlayer], testGame.deckCount[nextPlayer], "Opponent deck count");
 
 	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
 
