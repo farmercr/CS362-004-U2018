@@ -54,7 +54,7 @@ int main()
 	struct gameState startGame, testGame;
 	int k[10] = {adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village};
-	const char* kingdomCardNames[] = {"Adventurer", "Baron", "Council_Room",
+	const char* kingdomCardNames[] = {"Adventurer", "Baron", "Council Room",
 		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village"};
 	int startHandTreasure = 0;
 	int testHandTreasure = 0;
@@ -75,7 +75,7 @@ int main()
 	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
 	
 	// test player action count
-	assertResult(startGame.numActions, testGame.numActions, "Player action count");
+	assertResult((startGame.numActions - 1), (testGame.numActions -1), "Player action count");
 
 	// test player buy count
 	assertResult(startGame.numBuys, testGame.numBuys, "Player buy count");
