@@ -43,7 +43,7 @@ int main()
 	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
 
 	assertResult(1, 1, "One equals one");
-	assertResult 2, 1, "One does not equal two");
+	assertResult(2, 1, "One does not equal two");
 
 	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
 
