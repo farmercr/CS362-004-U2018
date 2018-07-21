@@ -60,7 +60,7 @@ unittestresults.out: cardtest1 cardtest2 cardtest3 cardtest4 unittest1 unittest2
 	
 	echo "" > unittestresults.out
 	echo "" >> unittestresults.out
-	echo "     -------------------- DOMINION TEST SUITE RESULTS --------------------     " >> unittestresults.out
+	echo "-------------------- DOMINION TEST SUITE RESULTS --------------------" >> unittestresults.out
    echo "" >> unittestresults.out      
 	echo "-------------------- Unit Test Results --------------------" >> unittestresults.out
 	echo "" >> unittestresults.out
@@ -130,7 +130,7 @@ unittestresults.out: cardtest1 cardtest2 cardtest3 cardtest4 unittest1 unittest2
 	echo "-------------------- Unit Tests Complete --------------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 	
-	echo "     -------------------- DOMINION TEST SUITE COMPLETE --------------------    " >> unittestresults.out
+	echo "     -------------------- DOMINION TEST SUITE COMPLETE --------------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 	echo "" >> unittestresults.out
 
