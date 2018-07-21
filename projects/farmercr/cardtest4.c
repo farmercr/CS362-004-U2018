@@ -81,7 +81,7 @@ int main()
 	assertResult(startGame.numBuys, testGame.numBuys, "Player buy count");
 
 	// test player hand card count
-	assertResult(startGame.handCount[thisPlayer] - 1 + 1), testGame.handCount[thisPlayer], "Player hand count");
+	assertResult((startGame.handCount[thisPlayer] - 1 + 1), testGame.handCount[thisPlayer], "Player hand count");
 
 	// test that the player deck decreased by 4 cards
 	assertResult((startGame.deckCount[thisPlayer] - 1), testGame.deckCount[thisPlayer], "Player deck count");
