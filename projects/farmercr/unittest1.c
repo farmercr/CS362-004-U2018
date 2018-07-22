@@ -56,7 +56,7 @@ int main()
 	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village };
 	//const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council Room",
-		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
+	//	"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
 	//int startHandTreasure = 0;
 	//int testHandTreasure = 0;
 	//int currentCard;
