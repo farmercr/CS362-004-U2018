@@ -78,7 +78,7 @@ int main()
 	int handCount = 1;
 	int discardCount = 1;
 	
-	excpected = deckCount + handCount + discardCount;
+	expected = deckCount + handCount + discardCount;
 
 	testGame.deck[thisPlayer][0] = testCard;
 	testGame.deckCount[thisPlayer] = deckCount;
