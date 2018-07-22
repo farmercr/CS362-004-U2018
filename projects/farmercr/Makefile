@@ -137,7 +137,12 @@ unittestresults.out: $(TEST_UNITS_CARDS)
 	gcov dominion.c >> unittestresults.out
 	echo "--------------- cardtest4.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
-		
+
+	echo "--------------- dominion.c gcov results ---------------" >> unittestresults.out
+	echo "" >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
+
 	echo "     -------------------- DOMINION TEST SUITE COMPLETE --------------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 	echo "" >> unittestresults.out
