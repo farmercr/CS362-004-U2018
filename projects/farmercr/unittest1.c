@@ -75,18 +75,26 @@ int main()
 
 	int testCard = copper;
 	int deckCount = 1;
-	int handCount = 1;
-	int discardCount = 1;
+	int handCount = 0;
+	int discardCount = 0;
 	
-	expected = deckCount + handCount + discardCount;
-
 	testGame.deck[thisPlayer][0] = testCard;
 	testGame.deckCount[thisPlayer] = deckCount;
+	expected = deckCount + handCount + discardCount;
+	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+	assertResult(expected, actual, "One copper in deck pile");
+
+	handCount = 1;
 	testGame.hand[thisPlayer][0] = testCard;
 	testGame.handCount[thisPlayer] =  handCount;
+	expected = deckCount + handCount + discardCount;
+	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+	assertResult(expected, actual, "One copper in deck and hand piles");
+	
+	discardCount = 1;
 	testGame.discard[thisPlayer][0] = testCard;
 	testGame.discardCount[thisPlayer] = discardCount;
-
+	expected = deckCount + handCount + discardCount;
 	actual = fullDeckCount(thisPlayer, testCard, &testGame);
 	assertResult(expected, actual, "One copper in each pile");
 	
@@ -96,12 +104,15 @@ int main()
 
 	expected = 7;
 	actual = fullDeckCount(thisPlayer, copper, &startGame);
-	assertResult(expected, actual, "Regular start copper test");
+	assertResult(expected, actual, "Regular start copper count");
 
 	expected = 3;
 	actual = fullDeckCount(thisPlayer, estate, &startGame);
-	assertResult(expected, actual, "Regular start estate test");
-	
+	assertResult(expected, actual, "Regular start estate count");
+
+	expected = 0;
+	actual = fullDeckCount(thisPlayer, silver, &startGame);
+	assertResult(expected, actual, "Regular start silver count");
 
 	/*
 	int fullDeckCount(int player, int card, struct gameState *state) {
