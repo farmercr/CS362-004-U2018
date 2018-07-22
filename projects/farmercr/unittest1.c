@@ -45,8 +45,8 @@ int main()
 	//int xtraCoins = 0;
 	//int shuffledCards = 0;
 
-	int i;
-	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+	//int i;
+	//int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
 	//int remove1, remove2;
 	int seed = 50;
 	int numPlayers = 2;
@@ -55,11 +55,11 @@ int main()
 	struct gameState startGame, testGame;
 	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
 		remodel, smithy, tribute, village };
-	const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council Room",
+	//const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council Room",
 		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
-	int startHandTreasure = 0;
-	int testHandTreasure = 0;
-	int currentCard;
+	//int startHandTreasure = 0;
+	//int testHandTreasure = 0;
+	//int currentCard;
 
 	int expected = 0;
 	int actual = 0;
@@ -74,10 +74,15 @@ int main()
 	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
 
 	int testCard = copper;
-	int deckCount = 1;
+	int deckCount = 0;
 	int handCount = 0;
 	int discardCount = 0;
 	
+	expected = deckCount + handCount + discardCount;
+	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+	assertResult(expected, actual, "No cards in any deck pile");
+
+	deckCount = 0;
 	testGame.deck[thisPlayer][0] = testCard;
 	testGame.deckCount[thisPlayer] = deckCount;
 	expected = deckCount + handCount + discardCount;
