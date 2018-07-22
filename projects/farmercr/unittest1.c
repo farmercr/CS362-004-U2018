@@ -65,16 +65,36 @@ int main()
 	int actual = 0;
 
 	// initialize a game state and player cards
-	initializeGame(numPlayers, k, seed, &testGame);
+	// initializeGame(numPlayers, k, seed, &testGame);
 
 	// copy the gameState to maintain a starting state for a baseline
-	memcpy(&startGame, &testGame, sizeof(struct gameState));
+	// memcpy(&startGame, &testGame, sizeof(struct gameState));
 
 
 	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
 
-	expected = 3;
-	actual = fullDeckCount(thisPlayer, 1, &testGame);
+	int testCard = copper;
+	int deckCount = 1;
+	int handCount = 1;
+	int discardCount = 1;
+	
+	excpected = deckCount + handCount + discardCount;
+
+	testGame.deck[thisPlayer][0] = testCard;
+	testGame.deckCount[thisPlayer] = deckCount;
+	testGame.hand[thisPlayer][0] = testCard;
+	testGame.handCount[thisPlayer] =  handCount;
+	testGame.discard[thisPlayer][0] = testCard;
+	testGame.discardCount[thisPlayer] = discardCount;
+
+	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+	assertResult(expected, actual, "One copper in each pile");
+	
+	expected = 0;
+	actual = fullDeckCount(thisPlayer, silver, &testGame);
+	assertResult(expected, actual, "No silver in any pile");
+
+
 	
 	/*
 	int fullDeckCount(int player, int card, struct gameState *state) {
