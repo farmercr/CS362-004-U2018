@@ -65,7 +65,7 @@ int main()
 	int actual = 0;
 
 	// initialize a game state and player cards
-	// initializeGame(numPlayers, k, seed, &testGame);
+	initializeGame(numPlayers, k, seed, &startGame);
 
 	// copy the gameState to maintain a starting state for a baseline
 	// memcpy(&startGame, &testGame, sizeof(struct gameState));
@@ -94,8 +94,15 @@ int main()
 	actual = fullDeckCount(thisPlayer, silver, &testGame);
 	assertResult(expected, actual, "No silver in any pile");
 
+	expected = 7;
+	actual = fullDeckCount(thisPlayer, copper, &startGame);
+	assertResult(expected, actual, "Regular start copper test");
 
+	expected = 3;
+	actual = fullDeckCount(thisPlayer, estate, &startGame);
+	assertResult(expected, actual, "Regular start estate test");
 	
+
 	/*
 	int fullDeckCount(int player, int card, struct gameState *state) {
 		int i;
@@ -122,7 +129,7 @@ int main()
 	*/
 
 
-	assertResult(expected, actual, "Regular build test");
+	
 	//assertResult(2, 1, "One does not equal two");
 
 	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
