@@ -68,32 +68,48 @@ unittestresults.out: $(TEST_UNITS_CARDS)
 	
 	echo "--------------- Testing unittest1.c ---------------" >> unittestresults.out
 	./unittest1 >> unittestresults.out
+	echo "     ----- unittest1.c gcov results -----" >> unittestresults.out
 	gcov unittest1.c >> unittestresults.out
+	cat unittest1.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
+	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	echo "--------------- unittest1.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
 	echo "--------------- Testing unittest2.c ---------------" >> unittestresults.out
 	./unittest2 >> unittestresults.out
+	echo "     ----- unittest2.c gcov results -----" >> unittestresults.out
 	gcov unittest2.c >> unittestresults.out
+	cat unittest2.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
+	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	echo "--------------- unittest2.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
 	echo "--------------- Testing unittest3.c ---------------" >> unittestresults.out
 	./unittest3 >> unittestresults.out
+	echo "     ----- unittest3.c gcov results -----" >> unittestresults.out
 	gcov unittest3.c >> unittestresults.out
+	cat unittest3.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
+	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	echo "--------------- unittest3.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
 	echo "--------------- Testing unittest4.c ---------------" >> unittestresults.out
 	./unittest4 >> unittestresults.out
+		echo "     ----- unittest4.c gcov results -----" >> unittestresults.out
 	gcov unittest4.c >> unittestresults.out
+	cat unittest4.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
+	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
 	echo "--------------- unittest4.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
-
+	
 	echo "--------------- Testing cardtest1.c ---------------" >> unittestresults.out
 	./cardtest1 >> unittestresults.out
 	echo "     ----- cardtest1.c gcov results -----" >> unittestresults.out
