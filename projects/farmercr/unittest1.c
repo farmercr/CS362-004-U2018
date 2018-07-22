@@ -74,7 +74,7 @@ int main()
 	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
 
 	expected = 10;
-	actual = fullDeckCount(thisPlayer, 0, testState);
+	actual = fullDeckCount(thisPlayer, 0, testGame);
 	
 	/*
 	int fullDeckCount(int player, int card, struct gameState *state) {
