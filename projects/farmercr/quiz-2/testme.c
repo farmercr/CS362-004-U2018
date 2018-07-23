@@ -21,7 +21,7 @@ char *inputString()
 	
 	while (counter < length)
 	{
-		stringResult[counter] = charOptions[rand() % length];
+		stringResult[counter] = charOptions[rand() % 4];
 		counter++;
 	}
 	stringResult[length] = '\0';
