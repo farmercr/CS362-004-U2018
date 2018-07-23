@@ -5,14 +5,26 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+	char[9] charOptions = {'[','(','{',' ','a','x','}',')',']'};
+	int length = 9;
+	result = charOptions[rand() % length];
+	return result;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+	char[4] charOptions = {'r','e','s','t'};
+	int length = 5;
+	int counter = 0;
+	char*[6] result;
+	while (counter < length)
+	{
+		result[counter] = charOptions[rand() % length];
+		counter++;
+	}
+	result[length] = '\0';
+	
+	return result;
 }
 
 void testme()
