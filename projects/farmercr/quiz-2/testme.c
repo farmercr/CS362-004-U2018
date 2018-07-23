@@ -5,18 +5,18 @@
 
 char inputChar()
 {
-	char[9] charOptions = {'[','(','{',' ','a','x','}',')',']'};
+	char charOptions[9] = {'[','(','{',' ','a','x','}',')',']'};
 	int length = 9;
-	result = charOptions[rand() % length];
+	char result = charOptions[rand() % length];
 	return result;
 }
 
 char *inputString()
 {
-	char[4] charOptions = {'r','e','s','t'};
+	char charOptions[4] = {'r','e','s','t'};
 	int length = 5;
 	int counter = 0;
-	char*[6] result;
+	char* result[6];
 	while (counter < length)
 	{
 		result[counter] = charOptions[rand() % length];
