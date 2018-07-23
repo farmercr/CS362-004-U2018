@@ -39,17 +39,10 @@ void assertResult(int expected, int actual, char* testDescription)
 
 int main()
 {
-	//int seed = 50;
-	//int numPlayers = 2;
 	int thisPlayer = 0;
 	struct gameState testGame;
-	//int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
-	//	remodel, smithy, tribute, village };
 	int expected = 0;
 	int actual = 0;
-
-	// initialize a game state and player cards
-	//initializeGame(numPlayers, k, seed, &startGame);
 
 	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
 
@@ -70,6 +63,7 @@ int main()
 
 	bonusCoins = 0;
 	testCard = copper;
+	handCount = 1;
 	testGame.hand[thisPlayer][0] = testCard;
 	testGame.handCount[thisPlayer] = handCount;
 	expected = 1;
