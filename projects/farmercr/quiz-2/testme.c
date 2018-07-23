@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<time.h>
 
+char stringResult[6];
+
 char inputChar()
 {
 	char charOptions[9] = {'[','(','{',' ','a','x','}',')',']'};
@@ -16,15 +18,15 @@ char *inputString()
 	char charOptions[4] = {'r','e','s','t'};
 	int length = 5;
 	int counter = 0;
-	char result[6];
+	
 	while (counter < length)
 	{
-		result[counter] = charOptions[rand() % length];
+		stringResult[counter] = charOptions[rand() % length];
 		counter++;
 	}
-	result[length] = '\0';
+	stringResult[length] = '\0';
 	
-	return &result;
+	return stringResult;
 }
 
 void testme()
