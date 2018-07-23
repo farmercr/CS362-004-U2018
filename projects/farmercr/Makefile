@@ -76,6 +76,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- unittest1.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -88,6 +90,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- unittest2.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -100,6 +104,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- unittest3.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -112,6 +118,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- unittest4.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 	
@@ -124,6 +132,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- cardtest1.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -136,6 +146,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- cardtest2.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -148,6 +160,8 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- cardtest3.c complete --------------" >> unittestresults.out
 	echo "" >> unittestresults.out
 
@@ -160,12 +174,9 @@ unittestresults.out: $(TEST_UNITS_CARDS) $(TEST_BASE)
 	echo "" >> unittestresults.out
 	echo "     -----dominion.c gcov results -----" >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+	echo "" >> unittestresults.out
 	echo "--------------- cardtest4.c complete --------------" >> unittestresults.out
-	echo "" >> unittestresults.out
-
-	echo "--------------- dominion.c gcov results ---------------" >> unittestresults.out
-	echo "" >> unittestresults.out
-	##cat dominion.c.gcov >> unittestresults.out
 	echo "" >> unittestresults.out
 
 	echo "     -------------------- DOMINION TEST SUITE COMPLETE --------------------" >> unittestresults.out
