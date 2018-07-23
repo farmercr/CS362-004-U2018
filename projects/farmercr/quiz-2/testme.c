@@ -24,7 +24,7 @@ char *inputString()
 	}
 	result[length] = '\0';
 	
-	return result;
+	return &result;
 }
 
 void testme()
