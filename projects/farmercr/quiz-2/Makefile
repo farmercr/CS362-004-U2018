@@ -4,4 +4,4 @@ testme: testme.c
 	gcc -o testme testme.c $(CFLAGS)
 
 clean:
-	rm -rf testme
+	rm -rf testme *.gcda *.gcno
