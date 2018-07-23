@@ -77,7 +77,7 @@ int main()
 	testGame.supplyCount[testCard] = testSupplyCount;
 	expected = testSupplyCount;
 	actual = supplyCount(testCard, &testGame);
-	assertResult(expected, actual, "Negative one cards in supply");
+	assertResult(expected, actual, "Ninety-nine cards in supply");
 	
 	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
 
