@@ -16,7 +16,7 @@ char *inputString()
 	char charOptions[4] = {'r','e','s','t'};
 	int length = 5;
 	int counter = 0;
-	char* result[6];
+	char result[6];
 	while (counter < length)
 	{
 		result[counter] = charOptions[rand() % length];
