@@ -27,6 +27,7 @@
 #define MIN 3
 #define ITERATIONS 10000
 
+// variables to keep counts of various failures
 int failedCardEffect = 0;
 int failedShuffle = 0;
 int failedCardDraw = 0;
@@ -36,6 +37,7 @@ int failedDiscardCount = 0;
 int failedTreasureCount = 0;
 int failedActionCount = 0;
 
+// assert function that will test various comparisons and increment the failure count variables
 void assertResult(int expected1, int actual1, int expected2, int actual2, int caseType)
 {
 
@@ -94,6 +96,7 @@ void assertResult(int expected1, int actual1, int expected2, int actual2, int ca
 	}
 }
 
+// function that runs the test and baseline gameStates, comparing the results
 void randomTestCard(int player, struct gameState *testGame)
 {
 	int drawCardResult;
@@ -104,18 +107,24 @@ void randomTestCard(int player, struct gameState *testGame)
 	// copy the gameState to maintain a starting state for a baseline
 	memcpy(&startGame, testGame, sizeof(struct gameState));
 
+	// check that the card worked correctly
 	cardEffectResult = cardEffect(village, 0, 0, 0, testGame, 0, &bonus);
 	assertResult(0, cardEffectResult, 0, 0, 1);
 
+	// manually copy the test card's functions
+	// draw a card
 	drawCardResult = drawCard(player, &startGame);
 	assertResult(-1, drawCardResult, 0, startGame.deckCount[player], 3);
 
+	// increase action count by 2
 	startGame.numActions += 2;
 	assertResult(startGame.numActions, testGame->numActions, 0, 0, 8);
 
+	// discard the used Village card
 	discardCard(0, player, &startGame, 0);
 	assertResult(startGame.discardCount[player], testGame->discardCount[player], 0, 0, 7);
 
+	// compare results of various gameState statuses
 	assertResult(startGame.handCount[player], testGame->handCount[player], 0, 0, 5);
 	assertResult(startGame.deckCount[player], testGame->deckCount[player], 0, 0, 6);
 }
@@ -134,6 +143,7 @@ int main()
 	printf("\n\n----- Starting Random Testing of %s Card -----\n\n", TESTCARD);
 	printf("   Running test for %d iterations\n", ITERATIONS);
 
+	// loop that runs for number of declared iterations (10,000)
 	while (iterationCounter < ITERATIONS)
 	{
 		for (counter = 0; counter < sizeof(struct gameState); counter++)
@@ -141,6 +151,7 @@ int main()
 			((char*)&testGame)[counter] = floor(Random() * 256);
 		}
 
+		// set random values for game
 		player = floor(Random() * MAX_PLAYERS);
 		testGame.deckCount[player] = floor(Random() * MAX_DECK);
 		testGame.playedCardCount = floor(Random() * (MAX_DECK - 1));
@@ -153,6 +164,7 @@ int main()
 		iterationCounter++;
 	}
 
+	// log the results of the iterations
 	fails = failedCardEffect + failedShuffle + failedCardDraw + failedHandCount + failedDeckCount + failedDiscardCount + failedTreasureCount + failedActionCount;
 
 	if (ITERATIONS - fails <= 0)

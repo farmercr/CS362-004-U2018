@@ -27,6 +27,7 @@
 #define MIN 3
 #define ITERATIONS 10000
 
+// variables to keep counts of various failures
 int failedCardEffect = 0;
 int failedShuffle = 0;
 int failedCardDraw = 0;
@@ -35,6 +36,7 @@ int failedDeckCount = 0;
 int failedDiscardCount = 0;
 int failedTreasureCount = 0;
 
+// assert function that will test various comparisons and increment the failure count variables
 void assertResult(int expected1, int actual1, int expected2, int actual2, int caseType)
 {
 
@@ -87,8 +89,10 @@ void assertResult(int expected1, int actual1, int expected2, int actual2, int ca
 	}
 }
 
+// function that runs the test and baseline gameStates, comparing the results
 void randomTestCard(int player, struct gameState *testGame)
 {
+	// initial variables
 	int startTreasureCount = 0;
 	int testTreasureCount = 0;
 	int tempHand[MAX_HAND];
@@ -105,9 +109,12 @@ void randomTestCard(int player, struct gameState *testGame)
 	// copy the gameState to maintain a starting state for a baseline
 	memcpy(&startGame, testGame, sizeof(struct gameState));
 
+	// check that the card worked correctly
 	cardEffectResult = cardEffect(adventurer, 0, 0, 0, testGame, 0, &bonus);
 	assertResult(0, cardEffectResult, 0, 0, 1);
 
+	// manually copy the test card's functions
+	// loop that draws cards until 2 treasure cards are drawn and added to hand
 	while (drawnTreasure < 2)
 	{
 		if (startGame.deckCount[player] < 1)
@@ -132,12 +139,14 @@ void randomTestCard(int player, struct gameState *testGame)
 		}
 	}
 
+	// cleanup after treasure cards are drawn
 	while (tempHandCounter - 1 >= 0)
 	{
 		startGame.discard[player][startGame.discardCount[player]++] = tempHand[tempHandCounter - 1];
 		tempHandCounter--;
 	}
 
+	// get the count of treasure cards in the test gameState
 	counter = 0;
 	card = -1;
 	while (counter < testGame->handCount[player])
@@ -150,6 +159,7 @@ void randomTestCard(int player, struct gameState *testGame)
 		counter++;
 	}
 
+	// get the count of treasure cards in the baseline gameState
 	counter = 0;
 	card = -1;
 	while (counter < startGame.handCount[player])
@@ -161,7 +171,7 @@ void randomTestCard(int player, struct gameState *testGame)
 		}
 		counter++;
 	}
-
+	// compare results of various gameState statuses
 	assertResult(startTreasureCount, testTreasureCount, 0, 0, 4);
 	assertResult(startGame.handCount[player], testGame->handCount[player], 0, 0, 5);
 	assertResult(startGame.deckCount[player], testGame->deckCount[player], 0, 0, 6);
@@ -184,6 +194,7 @@ int main()
 	printf("\n\n----- Starting Random Testing of %s Card -----\n\n", TESTCARD);
 	printf("   Running test for %d iterations\n", ITERATIONS);
 
+	// loop that runs for number of declared iterations (10,000)
 	while (iterationCounter < ITERATIONS)
 	{
 		for (counter = 0; counter < sizeof(struct gameState); counter++)
@@ -191,10 +202,12 @@ int main()
 			((char*)&testGame)[counter] = floor(Random() * 256);
 		}
 		
+		// set random values for game
 		player = floor(Random() * MAX_PLAYERS);
 		testGame.deckCount[player] = floor(Random() * ((MAX_DECK - MIN) + 1) + MIN);
 		numTreasures = floor(Random() *((testGame.deckCount[player] - MIN) + 1) + MIN);
-
+		
+		// ensure that there are at least 3 treasure cards in the deck
 		counter = 0;
 		while (counter < numTreasures)
 		{
@@ -210,6 +223,7 @@ int main()
 		iterationCounter++;
 	}
 	
+	// log the results of the iterations
 	fails = failedCardEffect + failedShuffle + failedCardDraw + failedHandCount + failedDeckCount + failedDiscardCount + failedTreasureCount;
 
 	if (ITERATIONS - fails <= 0)
