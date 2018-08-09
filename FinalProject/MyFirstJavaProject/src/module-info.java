@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Craig
- *
- */
-module MyFirstJavaProject {
-}
