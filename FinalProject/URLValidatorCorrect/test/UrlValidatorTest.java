@@ -83,7 +83,7 @@ protected void setUp() {
    public void testIsValid(Object[] testObjects, long allowAllSchemes) {
 	      UrlValidator urlVal = new UrlValidator(null, null, allowAllSchemes);
 	      //UrlValidator urlVal = new UrlValidator(null, allowAllSchemes);
-      assertTrue(urlVal.isValid("http://www.google.com"));
+      assertTrue(urlVal.isValid("http://www.google.com:8080"));
       assertTrue(urlVal.isValid("http://www.google.com/"));
       int statusPerLine = 60;
       int printed = 0;
