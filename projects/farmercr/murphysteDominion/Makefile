@@ -207,5 +207,4 @@ randomtestcard2: randomtestcard2.c dominion.c rngs.c
 
 all: playdom player 
 
-clean:
-   rm -f *.o *.exe *.gcov *.gcda *.gcno *.so *.out testDrawCard playdom player randomtestadventurer randomtestcard1 randomtestcard2 testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+clean: rm -f *.o *.exe *.gcov *.gcda *.gcno *.so *.out testDrawCard playdom player randomtestadventurer randomtestcard1 randomtestcard2 testDrawCard unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
