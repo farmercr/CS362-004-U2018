@@ -1,0 +1,95 @@
+        -:    0:Source:unittest3.c
+        -:    0:Graph:unittest3.gcno
+        -:    0:Data:unittest3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/******************************************************************************
+        -:    2:* Program Name:	Assignment-3
+        -:    3:* Author:			Craig Farmer
+        -:    4:* Course:			CS 362 - 400, Summer 2018
+        -:    5:* Date Created:	07/16/2018
+        -:    6:* Last Modified:	07/22/2018
+        -:    7:* Due Date:			07/22/2018
+        -:    8:* File name:		unittest3.c
+        -:    9:* Description: A unit test for a dominion game function.
+        -:   10:* Websites consulted:
+        -:   11:*	https://www.gnu.org/software/make/manual/make.html
+        -:   12:******************************************************************************/
+        -:   13:
+        -:   14:#include "dominion.h"
+        -:   15:#include "dominion_helpers.h"
+        -:   16:#include <stdio.h>
+        -:   17:#include <string.h>
+        -:   18:#include <stdlib.h>
+        -:   19:#include "rngs.h"
+        -:   20:
+        -:   21:#define TESTFUNCTION "numHandCards"
+        -:   22:#define RED_TEXT "\x1b[31m"
+        -:   23:#define GREEN_TEXT "\x1b[32m"
+        -:   24:#define RESET_TEXT "\x1b[0m"
+        -:   25:
+        4:   26:void assertResult(int expected, int actual, char* testDescription)
+        -:   27:{
+        4:   28:	if (expected == actual)
+        -:   29:	{
+        4:   30:		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
+        4:   31:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   32:	}
+        -:   33:	else
+        -:   34:	{
+    #####:   35:		printf(RED_TEXT "   FAIL:" RESET_TEXT);
+    #####:   36:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   37:	}
+        4:   38:}
+        -:   39:
+        1:   40:int main()
+        -:   41:{
+        -:   42:	//int seed = 50;
+        -:   43:	//int numPlayers = 2;
+        1:   44:	int thisPlayer = 0;
+        -:   45:	struct gameState testGame;
+        -:   46:	//int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
+        -:   47:	//	remodel, smithy, tribute, village };
+        1:   48:	int expected = 0;
+        1:   49:	int actual = 0;
+        -:   50:
+        -:   51:	// initialize a game state and player cards
+        -:   52:	//initializeGame(numPlayers, k, seed, &startGame);
+        -:   53:
+        1:   54:	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
+        -:   55:
+        1:   56:	int handCount = 0;
+        -:   57:	
+        -:   58:	/*
+        -:   59:	int numHandCards(struct gameState *state) {
+        -:   60:		return state->handCount[whoseTurn(state)];
+        -:   61:	}
+        -:   62:*/
+        1:   63:	testGame.whoseTurn = thisPlayer;
+        -:   64:
+        1:   65:	testGame.handCount[thisPlayer] = handCount;
+        1:   66:	expected = handCount;
+        1:   67:	actual = numHandCards(&testGame);
+        1:   68:	assertResult(expected, actual, "Empty hand");
+        -:   69:
+        1:   70:	handCount = 1;
+        1:   71:	testGame.handCount[thisPlayer] = handCount;
+        1:   72:	expected = handCount;
+        1:   73:	actual = numHandCards(&testGame);
+        1:   74:	assertResult(expected, actual, "One card in hand");
+        -:   75:
+        1:   76:	handCount = -1;
+        1:   77:	testGame.handCount[thisPlayer] = handCount;
+        1:   78:	expected = handCount;
+        1:   79:	actual = numHandCards(&testGame);
+        1:   80:	assertResult(expected, actual, "Negative one cards in hand");
+        -:   81:
+        1:   82:	handCount = 99;
+        1:   83:	testGame.handCount[thisPlayer] = handCount;
+        1:   84:	expected = handCount;
+        1:   85:	actual = numHandCards(&testGame);
+        1:   86:	assertResult(expected, actual, "Ninety-nine cards in hand");
+        -:   87:
+        1:   88:	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
+        -:   89:
+        -:   90:}

@@ -1,0 +1,109 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/******************************************************************************
+        -:    2:* Program Name:	Assignment-3
+        -:    3:* Author:			Craig Farmer
+        -:    4:* Course:			CS 362 - 400, Summer 2018
+        -:    5:* Date Created:	07/16/2018
+        -:    6:* Last Modified:	07/22/2018
+        -:    7:* Due Date:			07/22/2018
+        -:    8:* File name:		unittest1.c
+        -:    9:* Description: A unit test for a dominion game function.
+        -:   10:* Websites consulted:
+        -:   11:*	https://www.gnu.org/software/make/manual/make.html
+        -:   12:******************************************************************************/
+        -:   13:
+        -:   14:#include "dominion.h"
+        -:   15:#include "dominion_helpers.h"
+        -:   16:#include <stdio.h>
+        -:   17:#include <string.h>
+        -:   18:#include <stdlib.h>
+        -:   19:#include "rngs.h"
+        -:   20:
+        -:   21:#define TESTFUNCTION "fullDeckCount"
+        -:   22:#define RED_TEXT "\x1b[31m"
+        -:   23:#define GREEN_TEXT "\x1b[32m"
+        -:   24:#define RESET_TEXT "\x1b[0m"
+        -:   25:
+        8:   26:void assertResult(int expected, int actual, char* testDescription)
+        -:   27:{
+        8:   28:	if (expected == actual)
+        -:   29:	{
+        8:   30:		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
+        8:   31:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   32:	}
+        -:   33:	else
+        -:   34:	{
+    #####:   35:		printf(RED_TEXT "   FAIL:" RESET_TEXT);
+    #####:   36:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   37:	}
+        8:   38:}
+        -:   39:
+        1:   40:int main()
+        -:   41:{
+        1:   42:	int seed = 50;
+        1:   43:	int numPlayers = 2;
+        1:   44:	int thisPlayer = 0;
+        -:   45:	struct gameState startGame, testGame;
+        1:   46:	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
+        -:   47:		remodel, smithy, tribute, village };
+        1:   48:	int expected = 0;
+        1:   49:	int actual = 0;
+        -:   50:
+        -:   51:	// initialize a game state and player cards
+        1:   52:	initializeGame(numPlayers, k, seed, &startGame);
+        -:   53:
+        1:   54:	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
+        -:   55:
+        1:   56:	int testCard = copper;
+        1:   57:	int deckCount = 0;
+        1:   58:	int handCount = 0;
+        1:   59:	int discardCount = 0;
+        -:   60:	
+        1:   61:	expected = deckCount + handCount + discardCount;
+        1:   62:	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+        1:   63:	assertResult(expected, actual, "No cards in any deck pile");
+        -:   64:
+        1:   65:	deckCount = 1;
+        1:   66:	testGame.deck[thisPlayer][0] = testCard;
+        1:   67:	testGame.deckCount[thisPlayer] = deckCount;
+        1:   68:	expected = deckCount + handCount + discardCount;
+        1:   69:	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+        1:   70:	assertResult(expected, actual, "One copper in deck pile");
+        -:   71:
+        1:   72:	handCount = 1;
+        1:   73:	testGame.hand[thisPlayer][0] = testCard;
+        1:   74:	testGame.handCount[thisPlayer] =  handCount;
+        1:   75:	expected = deckCount + handCount + discardCount;
+        1:   76:	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+        1:   77:	assertResult(expected, actual, "One copper in deck and hand piles");
+        -:   78:	
+        1:   79:	discardCount = 1;
+        1:   80:	testGame.discard[thisPlayer][0] = testCard;
+        1:   81:	testGame.discardCount[thisPlayer] = discardCount;
+        1:   82:	expected = deckCount + handCount + discardCount;
+        1:   83:	actual = fullDeckCount(thisPlayer, testCard, &testGame);
+        1:   84:	assertResult(expected, actual, "One copper in each pile");
+        -:   85:	
+        1:   86:	expected = 0;
+        1:   87:	actual = fullDeckCount(thisPlayer, silver, &testGame);
+        1:   88:	assertResult(expected, actual, "No silver in any pile");
+        -:   89:
+        1:   90:	expected = 7;
+        1:   91:	actual = fullDeckCount(thisPlayer, copper, &startGame);
+        1:   92:	assertResult(expected, actual, "Regular start copper count");
+        -:   93:
+        1:   94:	expected = 3;
+        1:   95:	actual = fullDeckCount(thisPlayer, estate, &startGame);
+        1:   96:	assertResult(expected, actual, "Regular start estate count");
+        -:   97:
+        1:   98:	expected = 0;
+        1:   99:	actual = fullDeckCount(thisPlayer, silver, &startGame);
+        1:  100:	assertResult(expected, actual, "Regular start silver count");
+        -:  101:
+        1:  102:	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
+        -:  103:
+        -:  104:}
