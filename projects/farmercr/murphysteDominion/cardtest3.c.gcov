@@ -1,0 +1,130 @@
+        -:    0:Source:cardtest3.c
+        -:    0:Graph:cardtest3.gcno
+        -:    0:Data:cardtest3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/******************************************************************************
+        -:    2:* Program Name:	Assignment-3
+        -:    3:* Author:			Craig Farmer
+        -:    4:* Course:			CS 362 - 400, Summer 2018
+        -:    5:* Date Created:	07/16/2018
+        -:    6:* Last Modified:	07/22/2018
+        -:    7:* Due Date:			07/22/2018
+        -:    8:* File name:		cardtest3.c
+        -:    9:* Description: A card test for Council Room card function.
+        -:   10:* Websites consulted:
+        -:   11:*	https://www.gnu.org/software/make/manual/make.html
+        -:   12:******************************************************************************/
+        -:   13:
+        -:   14:#include "dominion.h"
+        -:   15:#include "dominion_helpers.h"
+        -:   16:#include <stdio.h>
+        -:   17:#include <string.h>
+        -:   18:#include <stdlib.h>
+        -:   19:#include "rngs.h"
+        -:   20:
+        -:   21:#define TESTCARD "Council Room"
+        -:   22:#define RED_TEXT "\x1b[31m"
+        -:   23:#define GREEN_TEXT "\x1b[32m"
+        -:   24:#define RESET_TEXT "\x1b[0m"
+        -:   25:
+       25:   26:void assertResult(int expected, int actual, char* testDescription)
+        -:   27:{
+       25:   28:	if (expected == actual)
+        -:   29:	{
+       25:   30:		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
+       25:   31:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   32:	}
+        -:   33:	else
+        -:   34:	{
+    #####:   35:		printf(RED_TEXT "   FAIL:" RESET_TEXT);
+    #####:   36:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   37:	}
+       25:   38:}
+        -:   39:
+        1:   40:int main()
+        -:   41:{
+        -:   42:	//int newCards = 0;
+        -:   43:	//int discarded = 1;
+        -:   44:	//int xtraCoins = 0;
+        -:   45:	//int shuffledCards = 0;
+        -:   46:
+        -:   47:	int i;
+        1:   48:	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        -:   49:	//int remove1, remove2;
+        1:   50:	int seed = 50;
+        1:   51:	int numPlayers = 2;
+        1:   52:	int thisPlayer = 0;
+        1:   53:	int nextPlayer = 1;
+        -:   54:	struct gameState startGame, testGame;
+        1:   55:	int k[10] = { adventurer, baron, council_room, cutpurse, mine, minion,
+        -:   56:		remodel, smithy, tribute, village };
+        1:   57:	const char* kingdomCardNames[] = { "Adventurer", "Baron", "Council Room",
+        -:   58:		"Cutpurse", "Mine", "Minion",	"Remodel", "Smithy", "Tribute", "Village" };
+        -:   59:	//int startHandTreasure = 0;
+        -:   60:	//int testHandTreasure = 0;
+        -:   61:	//int currentCard;
+        -:   62:
+        -:   63:	// initialize a game state and player cards
+        1:   64:	initializeGame(numPlayers, k, seed, &testGame);
+        -:   65:
+        -:   66:	// copy the gameState to maintain a starting state for a baseline
+        1:   67:	memcpy(&startGame, &testGame, sizeof(struct gameState));
+        -:   68:
+        1:   69:	printf("\n     ----- Testing %s Card -----\n", TESTCARD);
+        -:   70:
+        -:   71:	// 'play' the council room card
+        1:   72:	cardEffect(council_room, choice1, choice2, choice3, &testGame, handpos, &bonus);
+        -:   73:
+        -:   74:	// test that player played 1 card
+        1:   75:	assertResult((startGame.playedCardCount + 1), testGame.playedCardCount, "Player played card count");
+        -:   76:
+        -:   77:	// test player action count
+        1:   78:	assertResult((startGame.numActions - 1), (testGame.numActions - 1), "Player action count");
+        -:   79:
+        -:   80:	// test player buy count increased by 1
+        1:   81:	assertResult((startGame.numBuys + 1), testGame.numBuys, "Player buy count");
+        -:   82:
+        -:   83:	// test that player gained 4 cards
+        1:   84:	assertResult((startGame.handCount[thisPlayer] + 4 - 1), testGame.handCount[thisPlayer], "Player hand count");
+        -:   85:
+        -:   86:	// test that the player deck decreased by 4 cards
+        1:   87:	assertResult((startGame.deckCount[thisPlayer] - 4), testGame.deckCount[thisPlayer], "Player deck count");
+        -:   88:
+        -:   89:	// test that player coin count is unchanged
+        1:   90:	assertResult(startGame.coins, testGame.coins, "Player coin count");
+        -:   91:
+        -:   92:	// test the treasure card piles
+        1:   93:	assertResult(startGame.supplyCount[copper], testGame.supplyCount[copper], "Copper card pile count");
+        1:   94:	assertResult(startGame.supplyCount[silver], testGame.supplyCount[silver], "Silver card pile count");
+        1:   95:	assertResult(startGame.supplyCount[gold], testGame.supplyCount[gold], "Gold card pile count");
+        -:   96:
+        -:   97:	// test the curse card pile
+        1:   98:	assertResult(startGame.supplyCount[curse], testGame.supplyCount[curse], "Curse card pile count");
+        -:   99:
+        -:  100:	// test the victory card piles
+        1:  101:	assertResult(startGame.supplyCount[estate], testGame.supplyCount[estate], "Estate card pile count");
+        1:  102:	assertResult(startGame.supplyCount[duchy], testGame.supplyCount[duchy], "Duchy card pile count");
+        1:  103:	assertResult(startGame.supplyCount[province], testGame.supplyCount[province], "Province card pile count");
+        -:  104:
+        -:  105:	// test the kingdom card piles
+        1:  106:	i = 0;
+       12:  107:	while (i < 10)
+        -:  108:	{
+       10:  109:		char* cardStatement = malloc(sizeof(char) * (strlen(kingdomCardNames[i]) + 16 + 1));
+       10:  110:		strcpy(cardStatement, kingdomCardNames[i]);
+       10:  111:		strcat(cardStatement, " card pile count");
+       10:  112:		assertResult(startGame.supplyCount[k[i]], testGame.supplyCount[k[i]], cardStatement);
+       10:  113:		free(cardStatement);
+       10:  114:		i++;
+        -:  115:	}
+        -:  116:
+        -:  117:	// test opponent's hand count increased by 1
+        1:  118:	assertResult((startGame.handCount[nextPlayer] + 1), testGame.handCount[nextPlayer], "Opponent hand count");
+        -:  119:
+        -:  120:	// test opponent's deck count decreased by 1
+        1:  121:	assertResult((startGame.deckCount[nextPlayer] - 1), testGame.deckCount[nextPlayer], "Opponent deck count");
+        -:  122:
+        1:  123:	printf("     ----- %s Card Testing Complete -----\n\n", TESTCARD);
+        -:  124:
+        -:  125:}

@@ -1,0 +1,126 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/******************************************************************************
+        -:    2:* Program Name:	Assignment-3
+        -:    3:* Author:			Craig Farmer
+        -:    4:* Course:			CS 362 - 400, Summer 2018
+        -:    5:* Date Created:	07/16/2018
+        -:    6:* Last Modified:	07/22/2018
+        -:    7:* Due Date:			07/22/2018
+        -:    8:* File name:		unittest2.c
+        -:    9:* Description: A unit test for a dominion game function.
+        -:   10:* Websites consulted:
+        -:   11:*	https://www.gnu.org/software/make/manual/make.html
+        -:   12:******************************************************************************/
+        -:   13:
+        -:   14:#include "dominion.h"
+        -:   15:#include "dominion_helpers.h"
+        -:   16:#include <stdio.h>
+        -:   17:#include <string.h>
+        -:   18:#include <stdlib.h>
+        -:   19:#include "rngs.h"
+        -:   20:
+        -:   21:#define TESTFUNCTION "updateCoins"
+        -:   22:#define RED_TEXT "\x1b[31m"
+        -:   23:#define GREEN_TEXT "\x1b[32m"
+        -:   24:#define RESET_TEXT "\x1b[0m"
+        -:   25:
+        8:   26:void assertResult(int expected, int actual, char* testDescription)
+        -:   27:{
+        8:   28:	if (expected == actual)
+        -:   29:	{
+        8:   30:		printf(GREEN_TEXT "SUCCESS:" RESET_TEXT);
+        8:   31:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   32:	}
+        -:   33:	else
+        -:   34:	{
+    #####:   35:		printf(RED_TEXT "   FAIL:" RESET_TEXT);
+    #####:   36:		printf(" %s; Expected: %d, Actual: %d\n", testDescription, expected, actual);
+        -:   37:	}
+        8:   38:}
+        -:   39:
+        1:   40:int main()
+        -:   41:{
+        1:   42:	int thisPlayer = 0;
+        -:   43:	struct gameState testGame;
+        1:   44:	int expected = 0;
+        1:   45:	int actual = 0;
+        -:   46:
+        1:   47:	printf("\n     ----- Testing %s Function -----\n", TESTFUNCTION);
+        -:   48:
+        1:   49:	int testCard = 0;
+        1:   50:	int handCount = 0;
+        1:   51:	int bonusCoins = 0;
+        -:   52:
+        1:   53:	expected = 0;
+        1:   54:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   55:	actual = testGame.coins;
+        1:   56:	assertResult(expected, actual, "No coin cards or bonus");
+        -:   57:	
+        1:   58:	bonusCoins = 5;
+        1:   59:	expected = 5;
+        1:   60:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   61:	actual = testGame.coins;
+        1:   62:	assertResult(expected, actual, "Five bonus coins only");
+        -:   63:
+        1:   64:	bonusCoins = 0;
+        1:   65:	testCard = copper;
+        1:   66:	handCount = 1;
+        1:   67:	testGame.hand[thisPlayer][0] = testCard;
+        1:   68:	testGame.handCount[thisPlayer] = handCount;
+        1:   69:	expected = 1;
+        1:   70:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   71:	actual = testGame.coins;
+        1:   72:	assertResult(expected, actual, "One copper card in hand");
+        -:   73:
+        1:   74:	testCard = silver;
+        1:   75:	testGame.hand[thisPlayer][0] = testCard;
+        1:   76:	testGame.handCount[thisPlayer] = handCount;
+        1:   77:	expected = 2;
+        1:   78:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   79:	actual = testGame.coins;
+        1:   80:	assertResult(expected, actual, "One silver card in hand");
+        -:   81:
+        1:   82:	testCard = gold;
+        1:   83:	testGame.hand[thisPlayer][0] = testCard;
+        1:   84:	testGame.handCount[thisPlayer] = handCount;
+        1:   85:	expected = 3;
+        1:   86:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   87:	actual = testGame.coins;
+        1:   88:	assertResult(expected, actual, "One gold card in hand");
+        -:   89:
+        1:   90:	testCard = silver;
+        1:   91:	handCount = 2;
+        1:   92:	testGame.hand[thisPlayer][1] = testCard;
+        1:   93:	testGame.handCount[thisPlayer] = handCount;
+        1:   94:	expected = 5;
+        1:   95:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:   96:	actual = testGame.coins;
+        1:   97:	assertResult(expected, actual, "One gold and one silver card in hand");
+        -:   98:
+        1:   99:	bonusCoins = 0;
+        1:  100:	testCard = copper;
+        1:  101:	handCount = 3;
+        1:  102:	testGame.hand[thisPlayer][2] = testCard;
+        1:  103:	testGame.handCount[thisPlayer] = handCount;
+        1:  104:	expected = 6;
+        1:  105:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:  106:	actual = testGame.coins;
+        1:  107:	assertResult(expected, actual, "One of each coin card in hand");
+        -:  108:
+        1:  109:	bonusCoins = 5;
+        1:  110:	testCard = copper;
+        1:  111:	handCount = 3;
+        1:  112:	testGame.hand[thisPlayer][2] = testCard;
+        1:  113:	testGame.handCount[thisPlayer] = handCount;
+        1:  114:	expected = 11;
+        1:  115:	updateCoins(thisPlayer, &testGame, bonusCoins);
+        1:  116:	actual = testGame.coins;
+        1:  117:	assertResult(expected, actual, "One of each coin card in hand plus five bonus coins");
+        -:  118:
+        1:  119:	printf("     ----- %s Unit Testing Complete -----\n\n", TESTFUNCTION);
+        -:  120:
+        -:  121:}
