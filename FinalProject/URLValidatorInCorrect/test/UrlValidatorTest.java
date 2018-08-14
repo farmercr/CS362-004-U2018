@@ -16,6 +16,35 @@ public class UrlValidatorTest extends TestCase
       super(testName);
    }
 
+   class urlPart
+   {
+	    public String strValue;
+	    public int intValue;
+	    
+	    urlPart(String strValue, int intValue)
+		{
+	   	 this.strValue = strValue;
+	   	 this.intValue = intValue;
+	    }
+	}
+
+   // assert helper function that returns a boolean
+   public boolean AssertResultsProgram(boolean test, boolean expected, String subject)
+   {
+	   if(test == expected)
+		{
+	   	 // do nothing for now
+	    	//System.out.println("     PASSED: test = " + test + "; expected = " + expected + "; " + subject);
+	   	 return true;
+		}
+		else
+		{
+			System.out.println("     FAILED: test = " + test + "; expected = " + expected  + "; " + subject);
+	    	return false;
+		}
+   }
+	
+   
    // Assert helper function 
    public void AssertResults(boolean test, boolean expected)
    {
@@ -159,34 +188,6 @@ public class UrlValidatorTest extends TestCase
       AssertResults(urlVal.isValid("http://www.google.com/abcde=f&g=h"), false, "query = abcde=f&g=h");
    }
    
-   class urlPart
-   {
-	    public String strValue;
-	    public int intValue;
-	    
-	    urlPart(String strValue, int intValue)
-		{
-	   	 this.strValue = strValue;
-	   	 this.intValue = intValue;
-	    }
-	}
-
-	public boolean AssertResultsProgram(boolean test, boolean expected, String subject)
-	{
-		if(test == expected)
-		{
-	   	 // do nothing for now
-	    	//System.out.println("     PASSED: test = " + test + "; expected = " + expected + "; " + subject);
-	   	 return true;
-		}
-		else
-		{
-			System.out.println("     FAILED: test = " + test + "; expected = " + expected  + "; " + subject);
-	    	return false;
-		}
-	}
-	
-	
 	   public void testIsValid()
 	   {
 	   	//You can use this function for programming based testing
