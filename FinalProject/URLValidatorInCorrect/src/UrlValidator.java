@@ -150,7 +150,7 @@ public class UrlValidator implements Serializable {
             "(?::" + USERINFO_CHARS_REGEX + "*)?@"; // colon and password may be absent
     private static final String AUTHORITY_REGEX =
             "(?:\\[("+IPV6_REGEX+")\\]|(?:(?:"+USERINFO_FIELD_REGEX+")?([" + AUTHORITY_CHARS_REGEX + "]*)))(?::(\\d*))?(.*)?";
-    		//             1                          e.g. user:pass@          2                                         3       4
+    //             1                          e.g. user:pass@          2                                         3       4
     private static final Pattern AUTHORITY_PATTERN = Pattern.compile(AUTHORITY_REGEX);
 
     private static final int PARSE_AUTHORITY_IPV6 = 1;
@@ -164,7 +164,7 @@ public class UrlValidator implements Serializable {
      */
     private static final int PARSE_AUTHORITY_EXTRA = 4;
 
-    private static final String PATH_REGEX = "^(/[-\\w:@&?=+,.!*'%$_;\\(\\)]*)?$"; // /~ added
+    private static final String PATH_REGEX = "^(/[-\\w:@&?=+,.!*'%$_;\\(\\)]*)?$";
     private static final Pattern PATH_PATTERN = Pattern.compile(PATH_REGEX);
 
     private static final String QUERY_REGEX = "^(\\S*)$";
@@ -280,6 +280,7 @@ public class UrlValidator implements Serializable {
             allowedSchemes = new HashSet<String>(schemes.length);
             for(int i=0; i < schemes.length; i++) {
                 allowedSchemes.add(schemes[i].toUpperCase(Locale.ENGLISH));
+
             }
         }
 
@@ -313,7 +314,8 @@ public class UrlValidator implements Serializable {
         }
 
         String authority = urlMatcher.group(PARSE_URL_AUTHORITY);
-        if ("http".equals(scheme)) {// Special case - file: allows an empty authority/////
+
+        if ("http".equals(scheme)) {// Special case - file: allows an empty authority
             if (authority != null) {
                 if (authority.contains(":")) { // but cannot allow trailing :
                     return false;

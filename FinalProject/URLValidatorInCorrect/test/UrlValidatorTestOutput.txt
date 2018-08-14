@@ -1,0 +1,178 @@
+---------- Manual Tests -----------
+Basic URLs
+     PASSED: test = true; expected = true
+     PASSED: test = true; expected = true
+Specific Path
+     PASSED: test = true; expected = true
+IP Address with Scheme
+     PASSED: test = true; expected = true
+Port with Specific Path
+     FAILED: test = false; expected = true
+     FAILED: test = false; expected = true
+     FAILED: test = false; expected = true
+     FAILED: test = false; expected = true
+     FAILED: test = false; expected = true
+Query Path
+     PASSED: test = true; expected = true
+No Scheme
+     PASSED: test = false; expected = false
+Invalid Scheme
+     PASSED: test = false; expected = false
+Invalid Path
+     PASSED: test = false; expected = false
+     PASSED: test = false; expected = false
+IP Address Number Greater Than 255
+     PASSED: test = false; expected = false
+     FAILED: test = true; expected = false
+     PASSED: test = true; expected = true
+No Address
+     PASSED: test = false; expected = false
+
+
+---------- Partition Tests -----------
+Scheme Partition Test -- Default Schemes
+     PASSED: test = false; expected = false; scheme = htt://
+     FAILED: test = false; expected = true; scheme = https://
+     PASSED: test = false; expected = false; scheme = ://
+Scheme Partition Test -- Allow All Schemes
+     PASSED: test = true; expected = true; scheme = http://
+     PASSED: test = false; expected = false; scheme = 5tg://
+Authority Partition Test
+     PASSED: test = true; expected = true
+     PASSED: test = true; expected = true
+     PASSED: test = true; expected = true
+     PASSED: test = false; expected = false
+Port Partition Test
+     PASSED: test = false; expected = false; port = :0
+     FAILED: test = false; expected = true; port = :65535
+     PASSED: test = false; expected = false; port = :a80b90
+     FAILED: test = false; expected = true; port = :80
+Path Partition Test
+     PASSED: test = true; expected = true; path = /index
+     PASSED: test = false; expected = false; path = //test
+     PASSED: test = false; expected = false; path = /a/b/c/d
+     PASSED: test = false; expected = false; path = /../file
+     FAILED: test = false; expected = true; path = /index/test
+Query Partition Test
+     PASSED: test = true; expected = true; query = abcd?e=f&g=h
+     FAILED: test = true; expected = false; query = abcd?
+     FAILED: test = true; expected = false; query = abcde=f&g=h
+
+
+---------- Programming-Based Tests -----------
+     FAILED: test = true; expected = false; http://www.google.com?action=view, value=1
+     FAILED: test = true; expected = false; http://www.google.com?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://www.google.comaaa, value=1
+     FAILED: test = true; expected = false; http://www.google.comaaa?action=view, value=1
+     FAILED: test = true; expected = false; http://www.google.comaaa?action=edit&mode=up, value=1
+     FAILED: test = false; expected = true; http://www.google.com/~test, value=0
+     FAILED: test = false; expected = true; http://www.google.com/~test?action=view, value=0
+     FAILED: test = false; expected = true; http://www.google.com/~test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1/test, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1/test?action=view, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1/test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1//test, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1//test?action=view, value=0
+     FAILED: test = false; expected = true; http://www.google.com/test1//test?action=edit&mode=up, value=0
+     FAILED: test = true; expected = false; http://go.com?action=view, value=1
+     FAILED: test = true; expected = false; http://go.com?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://go.comaaa, value=1
+     FAILED: test = true; expected = false; http://go.comaaa?action=view, value=1
+     FAILED: test = true; expected = false; http://go.comaaa?action=edit&mode=up, value=1
+     FAILED: test = false; expected = true; http://go.com/~test, value=0
+     FAILED: test = false; expected = true; http://go.com/~test?action=view, value=0
+     FAILED: test = false; expected = true; http://go.com/~test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://go.com/test1/test, value=0
+     FAILED: test = false; expected = true; http://go.com/test1/test?action=view, value=0
+     FAILED: test = false; expected = true; http://go.com/test1/test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://go.com/test1//test, value=0
+     FAILED: test = false; expected = true; http://go.com/test1//test?action=view, value=0
+     FAILED: test = false; expected = true; http://go.com/test1//test?action=edit&mode=up, value=0
+     FAILED: test = true; expected = false; http://0.0.0.0?action=view, value=1
+     FAILED: test = true; expected = false; http://0.0.0.0?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://0.0.0.0aaa, value=1
+     FAILED: test = true; expected = false; http://0.0.0.0aaa?action=view, value=1
+     FAILED: test = true; expected = false; http://0.0.0.0aaa?action=edit&mode=up, value=1
+     FAILED: test = false; expected = true; http://0.0.0.0/~test, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/~test?action=view, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/~test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1/test, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1/test?action=view, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1/test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1//test, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1//test?action=view, value=0
+     FAILED: test = false; expected = true; http://0.0.0.0/test1//test?action=edit&mode=up, value=0
+     FAILED: test = true; expected = false; http://255.255.255.255?action=view, value=1
+     FAILED: test = true; expected = false; http://255.255.255.255?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://255.255.255.255aaa, value=1
+     FAILED: test = true; expected = false; http://255.255.255.255aaa?action=view, value=1
+     FAILED: test = true; expected = false; http://255.255.255.255aaa?action=edit&mode=up, value=1
+     FAILED: test = false; expected = true; http://255.255.255.255/~test, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/~test?action=view, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/~test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1/test, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1/test?action=view, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1/test?action=edit&mode=up, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1//test, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1//test?action=view, value=0
+     FAILED: test = false; expected = true; http://255.255.255.255/test1//test?action=edit&mode=up, value=0
+     FAILED: test = true; expected = false; http://1.1.1.400, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400?action=view, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/?action=view, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test?action=view, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test1, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test1?action=view, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400/test1?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://1.1.1.400aaa, value=2
+     FAILED: test = true; expected = false; http://1.1.1.400aaa?action=view, value=2
+     FAILED: test = true; expected = false; http://1.1.1.400aaa?action=edit&mode=up, value=2
+     FAILED: test = true; expected = false; http://aaa, value=1
+     FAILED: test = true; expected = false; http://aaa?action=view, value=1
+     FAILED: test = true; expected = false; http://aaa?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://aaa/, value=1
+     FAILED: test = true; expected = false; http://aaa/?action=view, value=1
+     FAILED: test = true; expected = false; http://aaa/?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://aaa/test, value=1
+     FAILED: test = true; expected = false; http://aaa/test?action=view, value=1
+     FAILED: test = true; expected = false; http://aaa/test?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://aaa/test1, value=1
+     FAILED: test = true; expected = false; http://aaa/test1?action=view, value=1
+     FAILED: test = true; expected = false; http://aaa/test1?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://aaaaaa, value=2
+     FAILED: test = true; expected = false; http://aaaaaa?action=view, value=2
+     FAILED: test = true; expected = false; http://aaaaaa?action=edit&mode=up, value=2
+     FAILED: test = true; expected = false; http://.aaa, value=1
+     FAILED: test = true; expected = false; http://.aaa?action=view, value=1
+     FAILED: test = true; expected = false; http://.aaa?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://.aaa/, value=1
+     FAILED: test = true; expected = false; http://.aaa/?action=view, value=1
+     FAILED: test = true; expected = false; http://.aaa/?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://.aaa/test, value=1
+     FAILED: test = true; expected = false; http://.aaa/test?action=view, value=1
+     FAILED: test = true; expected = false; http://.aaa/test?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://.aaa/test1, value=1
+     FAILED: test = true; expected = false; http://.aaa/test1?action=view, value=1
+     FAILED: test = true; expected = false; http://.aaa/test1?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://.aaaaaa, value=2
+     FAILED: test = true; expected = false; http://.aaaaaa?action=view, value=2
+     FAILED: test = true; expected = false; http://.aaaaaa?action=edit&mode=up, value=2
+     FAILED: test = true; expected = false; http://, value=1
+     FAILED: test = true; expected = false; http://?action=view, value=1
+     FAILED: test = true; expected = false; http://?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http:///, value=1
+     FAILED: test = true; expected = false; http:///?action=view, value=1
+     FAILED: test = true; expected = false; http:///?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http:///test, value=1
+     FAILED: test = true; expected = false; http:///test?action=view, value=1
+     FAILED: test = true; expected = false; http:///test?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http:///test1, value=1
+     FAILED: test = true; expected = false; http:///test1?action=view, value=1
+     FAILED: test = true; expected = false; http:///test1?action=edit&mode=up, value=1
+     FAILED: test = true; expected = false; http://aaa, value=2
+     FAILED: test = true; expected = false; http://aaa?action=view, value=2
+     FAILED: test = true; expected = false; http://aaa?action=edit&mode=up, value=2
